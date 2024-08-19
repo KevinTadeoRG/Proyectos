@@ -13,8 +13,11 @@
     <h1>Adivina el número</h1>
     <p>Introduce un número entre 1 y 100:</p>
     <input type="number" id="numeroEntrada">
-    <button>Comprobar</button>
+    <button onclick="verificarNumero()">Comprobar</button>
+    <button onclick="mostrarNumero()">Ver numero</button>
     <p id="mensaje"></p>
+    <p>cantidad de intentos: </p>
+    <p id="intentos">0</p>
 
     <script src="script.js"></script>
 </body>

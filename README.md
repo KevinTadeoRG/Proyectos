@@ -1,6 +1,6 @@
 ## Link al curso completo de Javascript en Youtube:
-[VIDEO CURSO GRATIS COMPLETO: JavaScript Desde Cero por Sergie Code](https://youtu.be/N8Xt5rP_DUo)
 
+[VIDEO CURSO GRATIS COMPLETO: JavaScript Desde Cero por Sergie Code](https://youtu.be/N8Xt5rP_DUo)
 
 # Tutorial de Javascript: Juego de Adivinanza
 
@@ -14,43 +14,54 @@ El archivo Javascript principal es `script.js`, que contiene las siguientes func
 
 ### Generar un número aleatorio
 
-    let numeroAzar = Math.floor(Math.random() * 100) + 1;
+    let numeroRamdon = Math.floor(Math.random() * 100) + 1;
 
-Esta línea de código genera un número aleatorio entre 1 y 100 y lo guarda en la variable `numeroAzar`. Utilizamos `Math.random()` para generar un número decimal entre 0 y 1, luego lo multiplicamos por 100 para obtener un número entre 0 y 100, y finalmente utilizamos `Math.floor()` para redondear hacia abajo y obtener un número entero entre 0 y 99. Al sumar 1 al resultado, obtenemos un número aleatorio entre 1 y 100.
+Esta línea de código genera un número aleatorio entre 1 y 100 y lo guarda en la variable `numeroUsuario`. Utilizamos `Math.random()` para generar un número decimal entre 0 y 1, luego lo multiplicamos por 100 para obtener un número entre 0 y 100, y finalmente utilizamos `Math.floor()` para redondear hacia abajo y obtener un número entero entre 0 y 99. Al sumar 1 al resultado, obtenemos un número aleatorio entre 1 y 100.
 
 ### Obtener elementos del DOM
 
-    let numeroEntrada = document.getElementById('numeroEntrada');
-    let mensaje = document.getElementById('mensaje');
+    let numeroUsuario = document.getElementById('numeroEntrada');
+    let mensajeMostrado = document.getElementById('mensaje');
 
 Estas líneas de código obtienen referencias a los elementos del Document Object Model (DOM) utilizando el método `getElementById()`. El elemento con el id "numeroEntrada" representa el campo de entrada donde el usuario ingresa su número, y el elemento con el id "mensaje" muestra mensajes de retroalimentación al usuario.
 
 ### Función para comprobar el número ingresado
 
-    function chequearResultado() {
-        let numeroIngresado = parseInt(numeroEntrada.value);
-    
-        if (isNaN(numeroIngresado) || numeroIngresado < 1 || numeroIngresado > 100) {
-            mensaje.textContent = 'Por favor, introduce un número válido entre 1 y 100.';
+    function verificarNumero() {
+        let numeroParaAdivinar = parseInt(numeroUsuario.value);
+
+        if (isNaN(numeroParaAdivinar) || numeroParaAdivinar > 100 || numeroParaAdivinar < 0) {
+            mensajeMostrado.textContent = "favor de escribir un numero entre 1 y 100";
+            mensajeMostrado.style.color = "red";
             return;
         }
-    
-        if (numeroIngresado === numeroAzar) {
-            mensaje.textContent = '¡Felicidades! ¡Has adivinado el número correcto!';
-            mensaje.style.color = 'green';
-            numeroEntrada.disabled = true;
-        } else if (numeroIngresado < numeroAzar) {
-            mensaje.textContent = 'El número es mayor. Intenta de nuevo.';
-            mensaje.style.color = 'red';
-        } else {
-            mensaje.textContent = 'El número es menor. Intenta de nuevo.';
-            mensaje.style.color = 'red';
-        }
+
+    if(numeroParaAdivinar == numeroRamdon){
+        mensajeMostrado.textContent = "Numero acertado Felicidades";
+        mensajeMostrado.style.color = 'green';
+        numeroParaAdivinar.disable = true;
+    }else if(numeroParaAdivinar> numeroRamdon){
+        mensajeMostrado.textContent = 'El numero es mas pequeño';
+        mensajeMostrado.style.color = "orange";
+    }else{
+        mensajeMostrado.textContent = 'El numero es mas grande';
+        mensajeMostrado.style.color = "orange";
+    }
     }
 
-Esta función se llama cuando el usuario presiona el botón de "Comprobar". Primero, obtiene el número ingresado por el usuario utilizando `numeroEntrada.value` y lo convierte a un número entero utilizando `parseInt()`. Luego, verifica si el número ingresado es un número válido dentro del rango esperado (1-100). Si el número no es válido, se muestra un mensaje de error en el elemento "mensaje" y se devuelve de la función.
+Esta función se llama cuando el usuario presiona el botón de "Comprobar". Primero, obtiene el número ingresado por el usuario utilizando `numeroUsuario.value` y lo convierte a un número entero utilizando `parseInt()`. Luego, verifica si el número ingresado es un número válido dentro del rango esperado (1-100). Si el número no es válido, se muestra un mensaje de error en el elemento "mensaje" y se devuelve de la función.
 
-Si el número ingresado es válido, se compara con el número generado aleatoriamente. Si son iguales, se muestra un mensaje de felicitación y se deshabilita el campo de entrada. Si el número ingresado es menor que el número aleatorio, se muestra un mensaje indicando que el número es mayor. Si es mayor, se muestra un mensaje indicando que el número es menor. En ambos casos, el mensaje se muestra en el elemento "mensaje" y se cambia el color del texto al rojo.
+Si el número ingresado es válido, se compara con el número generado aleatoriamente. Si son iguales, se muestra un mensaje de felicitación y se deshabilita el campo de entrada. Si el número ingresado es menor que el número aleatorio, se muestra un mensaje indicando que el número es mayor. Si es mayor, se muestra un mensaje indicando que el número es menor. En ambos casos, el mensaje se muestra en el elemento "mensaje" y se cambia el color del texto al rojo y naranja.
+
+### Función para ver el número ramdon
+
+    function mostrarNumero(){
+    mensajeMostrado.textContent = numeroRamdon;
+    mensajeMostrado.style.color = 'blue'
+    }
+
+El objetivo principal de esta funcion, es para los usuarios que desconocer el número y que por mas que lo intentan no lo encuentran
+
 
 ## Uso del juego
 
